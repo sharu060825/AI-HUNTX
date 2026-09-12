@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI HUNTX — Retro-Futuristic AI Cyber-Terminal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<link rel="stylesheet" href="assets/css/style.css?v=2">
+</head>
+<body>
+
+<!-- Ambient particle layer -->
+<canvas id="particle-canvas"></canvas>
+
+<!-- Custom crosshair cursor (desktop) -->
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
+
+<!-- ============================================================
+     PRELOADER — RETRO AI TERMINAL BOOT SEQUENCE
+============================================================ -->
+<div id="loader">
+  <div class="loader-stage">
+    <div class="loader-terminal-bar">
+      <div class="loader-telemetry-left">
+        <span class="telemetry-pulse"></span>
+        <span>SYS.BOOT // AI_HUNTX.HEX</span>
+      </div>
+      <div>CORE: ONLINE</div>
+    </div>
+
+    <!-- Retro Terminal Vector Matrix -->
+    <svg class="loader-orbit-svg" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="cyberGlow" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="rgba(0,245,212,0.3)"/>
+          <stop offset="100%" stop-color="rgba(0,245,212,0)"/>
+        </radialGradient>
+      </defs>
+      <circle cx="100" cy="100" r="85" fill="url(#cyberGlow)"/>
+      <circle cx="100" cy="100" r="80" stroke="#00f5d4" stroke-width="1.5" stroke-dasharray="4 6"/>
+      <circle cx="100" cy="100" r="60" stroke="#f72585" stroke-width="1.2" stroke-dasharray="12 4"/>
+      <circle cx="100" cy="100" r="38" stroke="#fee440" stroke-width="1" stroke-dasharray="2 4"/>
+      <!-- Crosshairs -->
+      <line x1="100" y1="10" x2="100" y2="190" stroke="rgba(0,245,212,0.35)" stroke-width="1"/>
+      <line x1="10" y1="100" x2="190" y2="100" stroke="rgba(0,245,212,0.35)" stroke-width="1"/>
+      <!-- Central Pixel Node -->
+      <rect x="94" y="94" width="12" height="12" fill="#00f5d4"/>
+      <rect x="97" y="97" width="6" height="6" fill="#f72585"/>
+    </svg>
+
+    <div class="loader-text-wrap">
+      <span class="loader-word">AI</span>&nbsp;
+      <span class="loader-word accent">HUNTX</span>
+      <span class="loader-subtext">[ RETRO-FUTURISTIC AI CYBER-TERMINAL ]</span>
+    </div>
+
+    <div class="loader-bar">
+      <div class="loader-bar-fill" id="loader-fill"></div>
+    </div>
+    <div class="loader-caption">SYNTHESIZING NEURAL ARCHITECTURE // LEVEL 01</div>
+  </div>
+</div>
+
+<!-- ============================================================
+     ANIMATED BACKGROUND CANVAS
+============================================================ -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- ============================================================
+     NAVIGATION
+============================================================ -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <span class="nav-brand-bracket">[</span>
+      <span class="nav-brand-title">AI_HUNTX</span>
+      <span class="nav-brand-ver">v2.6</span>
+      <span class="nav-brand-bracket">]</span>
+      <span class="telemetry-pulse"></span>
+    </div>
+    <ul class="nav-links">
+      <li><a href="#details">Specs</a></li>
+      <li><a href="#timeline">Timeline</a></li>
+      <li><a href="#coordinators">Operators</a></li>
+      <li><a href="#faq">Codex</a></li>
+    </ul>
+    <div class="nav-right-group">
+      <button class="nav-cta" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">Execute Hunt</button>
+      <div class="hamburger" id="ham">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Navigation Drawer -->
+<div id="mobile-drawer">
+  <a href="#details">// 01: Mission Specs</a>
+  <a href="#timeline">// 02: Tactical Sequence</a>
+  <a href="#coordinators">// 03: Command Operators</a>
+  <a href="#faq">// 04: Query Codex</a>
+  <button class="nav-cta" style="margin-top:0.5rem" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'}); document.getElementById('mobile-drawer').classList.remove('open');">Execute Registration</button>
+</div>
+
+<!-- ============================================================
+     HERO SECTION
+============================================================ -->
+<section id="hero">
+  <div class="container" style="display:flex; flex-direction:column; align-items:center;">
+
+    <!-- Sathyabama & TRS Institutional Badge -->
+    <div class="hero-brand-block">
+      <div class="hero-brand-line1">Sathyabama Institute of Science and Technology</div>
+      <div class="hero-brand-logos">
+        <div class="hero-brand-logo logo-sathyabama"><img src="assets/images/sathyabama-logo-transparent.png?v=2" alt="Sathyabama Institute"/></div>
+        <div class="hero-brand-logo logo-trs"><img src="assets/images/robotics-society-logo-transparent.png?v=2" alt="The Robotics Society"/></div>
+      </div>
+      <div class="hero-brand-line2">
+        <span>Organized by <strong>The Robotics Society Sathyabama</strong></span>
+      </div>
+    </div>
+
+    <!-- Status Telemetry Badge -->
+    <div class="hero-badge">
+      <span class="hero-badge-dot"></span>
+      <span>SYS.ONLINE // RADAR ACTIVE // SEASON 2026</span>
+    </div>
+
+    <!-- 3D ISOMETRIC PIXEL HERO TITLE -->
+    <h1 class="hero-title">
+      AI <span class="title-accent">HUNTX</span>
+    </h1>
+
+    <!-- Call to Action Buttons -->
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('register').scrollIntoView({behavior:'smooth'})">
+        <span>Authorize Agent →</span>
+      </button>
+      <button class="btn-secondary" onclick="document.getElementById('details').scrollIntoView({behavior:'smooth'})">
+        Access Specs
+      </button>
+    </div>
+
+    <!-- MISSION COUNTDOWN -->
+    <div class="countdown" id="countdown">
+      <div class="countdown-unit">
+        <span class="countdown-num" id="cd-d">00</span>
+        <span class="countdown-label">Days</span>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <span class="countdown-num" id="cd-h">00</span>
+        <span class="countdown-label">Hours</span>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <span class="countdown-num" id="cd-m">00</span>
+        <span class="countdown-label">Mins</span>
+      </div>
+      <div class="countdown-sep">:</div>
+      <div class="countdown-unit">
+        <span class="countdown-num" id="cd-s">00</span>
+        <span class="countdown-label">Secs</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ============================================================
+     EVENT DETAILS // MISSION SPECS
+============================================================ -->
+<section id="details">
+  <div class="container">
+    <div class="details-header reveal">
+      <div class="section-eyebrow">// SYSTEM TELEMETRY //</div>
+      <h2 class="section-title">Mission Parameters</h2>
+      <p class="section-sub">Operational specifications for AI HUNTX candidates. Review telemetry before deployment.</p>
+    </div>
+
+    <div class="details-grid reveal-stagger">
+      <div class="detail-card reveal">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="detail-label">Operational Window</div>
+          <div class="detail-value">10:00 AM – 3:15 PM</div>
+        </div>
+      </div>
+
+      <div class="detail-card reveal">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.17a2 2 0 0 0-.59-1.42L12 12l-4.41 4.41A2 2 0 0 0 7 17.83V22"/><path d="M7 2v4.17a2 2 0 0 0 .59 1.41L12 12l4.41-4.42A2 2 0 0 0 17 6.17V2"/></svg>
+        </div>
+        <div>
+          <div class="detail-label">Mission Duration</div>
+          <div class="detail-value">4h 15m Active</div>
+        </div>
+      </div>
+
+      <div class="detail-card reveal">
+        <div class="detail-icon">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <div>
+          <div class="detail-label">Grid Coordinates</div>
+          <div class="detail-value">SCAS Block Node</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     TIMELINE // TACTICAL SEQUENCE
+============================================================ -->
+<section id="timeline">
+  <div class="container">
+    <div class="details-header reveal">
+      <div class="section-eyebrow">// EXECUTION PROTOCOL //</div>
+      <h2 class="section-title">Tactical Sequence</h2>
+      <p class="section-sub">Phased progression of the AI HUNTX event from initialization to evaluation.</p>
+    </div>
+
+    <div class="timeline-list">
+      <div class="timeline-item">
+        <div class="timeline-dot">01</div>
+        <div class="timeline-content">
+          <div class="timeline-time">[10:00 – 10:30 IST]</div>
+          <div class="timeline-title">Unit Formation + Problem Brief</div>
+          <div class="timeline-desc">Teams uplink to the system; problem statement is decrypted and released to all agents.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">02</div>
+        <div class="timeline-content">
+          <div class="timeline-time">[10:30 – 11:30 IST]</div>
+          <div class="timeline-title">Neural Ideation & Logic Synthesis</div>
+          <div class="timeline-desc">Squads formulate target algorithms and construct mathematical solution architectures.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">03</div>
+        <div class="timeline-content">
+          <div class="timeline-time">[11:30 – 12:30 IST]</div>
+          <div class="timeline-title">Strategy & Tactical Planning</div>
+          <div class="timeline-desc">Role distribution, model selection, and engineering pipeline blueprinting.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">04</div>
+        <div class="timeline-content">
+          <div class="timeline-time">[12:30 – 13:15 IST]</div>
+          <div class="timeline-title">Power Recharge // Lunch Break</div>
+          <div class="timeline-desc">System cooldown and nutrition replenishment before tactical AI development.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">05</div>
+        <div class="timeline-content">
+          <div class="timeline-time">[13:15 – 14:15 IST]</div>
+          <div class="timeline-title">AI Engine Deployment</div>
+          <div class="timeline-desc">Active prototyping using modern AI APIs, fine-tuning scripts, and automated workflows.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">06</div>
+        <div class="timeline-content">
+          <div class="timeline-time">[14:15 – 14:45 IST]</div>
+          <div class="timeline-title">Pitch & Demonstration Deck</div>
+          <div class="timeline-desc">Teams compile execution metrics, benchmark demonstrations, and final slide telemetry.</div>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot">07</div>
+        <div class="timeline-content">
+          <div class="timeline-time">[14:45 – 15:15 IST]</div>
+          <div class="timeline-title">Command Jury Review</div>
+          <div class="timeline-desc">Direct pitch presentation to the judging panel for scoring and evaluation.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     COORDINATORS // COMMAND OPERATORS
+============================================================ -->
+<section id="coordinators">
+  <div class="container">
+    <div class="details-header reveal">
+      <div class="section-eyebrow">// COMMAND UNIT //</div>
+      <h2 class="section-title">Tactical Operators</h2>
+      <p class="section-sub">Lead coordinators directing the AI HUNTX operational network.</p>
+    </div>
+
+    <div class="coordinators-grid reveal-stagger">
+      <div class="coordinator-card reveal">
+        <div class="coord-avatar"><img src="assets/images/coord-alvin-sudhan.jpg" alt="V. Alvin Sudhan"></div>
+        <div class="coord-name">V. Alvin Sudhan</div>
+        <div class="coord-role">President // TRS SIST</div>
+      </div>
+
+      <div class="coordinator-card reveal">
+        <div class="coord-avatar"><img src="assets/images/coord-jenna-therese.jpg" alt="X. Jenna Therese"></div>
+        <div class="coord-name">X. Jenna Therese</div>
+        <div class="coord-role">Vice President // TRS SIST</div>
+      </div>
+
+      <div class="coordinator-card reveal">
+        <div class="coord-avatar"><img src="assets/images/coord-devadharshan.jpg" alt="D. Devadharshan"></div>
+        <div class="coord-name">D. Devadharshan</div>
+        <div class="coord-role">Treasurer // TRS SIST</div>
+      </div>
+
+      <div class="coordinator-card reveal">
+        <div class="coord-avatar"><img src="assets/images/coord-sharika-s.jpg.png" alt="Sharika S"></div>
+        <div class="coord-name">Sharika S</div>
+        <div class="coord-role">Technical Lead // CSE Core</div>
+      </div>
+
+      <div class="coordinator-card reveal">
+        <div class="coord-avatar"><img src="assets/images/coord-niveditha-s.jpg" alt="Niveditha S"></div>
+        <div class="coord-name">Niveditha S</div>
+        <div class="coord-role">Event Lead // BE CSBS</div>
+      </div>
+
+      <div class="coordinator-card reveal">
+        <div class="coord-avatar"><img src="assets/images/coord-kishore-MS.jpeg" alt="Kishore MS"></div>
+        <div class="coord-name">Kishore MS</div>
+        <div class="coord-role">Technical Lead // CSE AIML</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     REGISTRATION FORM // TACTICAL AI HUNTER CONSOLE
+============================================================ -->
+<section id="register">
+  <div class="container">
+    <div class="register-layout">
+
+      <!-- Left Column: Mission Directives -->
+      <div class="register-left reveal">
+        <div class="section-eyebrow">// AGENT ENLISTMENT //</div>
+        <h2 class="section-title">Claim System Access</h2>
+        <p class="section-sub">
+          Authorize your squad into the central AI HUNTX network. Participant slots are strictly limited to 50 squads.
+        </p>
+
+        <div class="register-perks">
+          <div class="perk">
+            <div class="perk-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg>
+            </div>
+            <div class="perk-text">
+              <strong>Instant Node Dispatch</strong>
+              <span>Immediate confirmation telemetry dispatched to your communications address.</span>
+            </div>
+          </div>
+
+          <div class="perk">
+            <div class="perk-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div class="perk-text">
+              <strong>Encrypted Terminal Ledger</strong>
+              <span>Submissions stored in persistent local database and protected against tampering.</span>
+            </div>
+          </div>
+
+          <div class="perk">
+            <div class="perk-icon">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+            </div>
+            <div class="perk-text">
+              <strong>Bounty Rewards & Hardware Grants</strong>
+              <span>Top AI builders claim prize pools, computing credits, and institution commendations.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Tactical AI Hunter Console -->
+      <div class="reveal">
+        <div class="form-card" id="form-card">
+
+          <!-- Distinctive Procedural Telemetry Top Bar -->
+          <div class="console-telemetry-bar">
+            <div style="display:flex; align-items:center; gap:0.5rem;">
+              <span class="telemetry-pulse"></span>
+              <span>[ AI_HUNTX // v2.6 ]</span>
+            </div>
+            <div class="telemetry-node-status">
+              <span>COORD: 13.0827°N // NODE: ACTIVE</span>
+            </div>
+          </div>
+
+          <div class="console-body-wrap">
+            <div id="form-body">
+              <div class="form-title">Terminal Registration</div>
+              <div class="form-subtitle">ENTER AGENT CREDENTIALS (* = MANDATORY)</div>
+
+              <form id="reg-form" novalidate>
+                <div class="form-grid">
+
+                  <!-- Leader / Personal Credentials -->
+                  <div class="form-section-label">// 01: SQUAD LEADER CREDENTIALS</div>
+
+                  <div class="form-group full">
+                    <label class="form-label" for="fullname">SYS:ENTER_HANDLE (FULL NAME) <span class="req">*</span></label>
+                    <input class="form-input" id="fullname" name="fullname" type="text" placeholder="e.g., Alex Vance" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="regno">ID:REGISTER_NUMBER <span class="req">*</span></label>
+                    <input class="form-input" id="regno" name="regno" type="text" placeholder="e.g., 41110001" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="mobile">COMMS:MOBILE_UPLINK <span class="req">*</span></label>
+                    <input class="form-input" id="mobile" name="mobile" type="tel" placeholder="+91 98765 43210" required pattern="[0-9+\s\-]{10,15}">
+                  </div>
+
+                  <div class="form-group full">
+                    <label class="form-label" for="email">NET:COMM_FREQ (EMAIL) <span class="req">*</span></label>
+                    <input class="form-input" id="email" name="email" type="email" placeholder="agent@sathyabama.ac.in" required>
+                  </div>
+
+                  <div class="form-divider"></div>
+
+                  <!-- Academic Department Details -->
+                  <div class="form-section-label">// 02: ACADEMIC AFFILIATION</div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="dept">TRACK:SELECT_DOMAIN (DEPARTMENT) <span class="req">*</span></label>
+                    <input class="form-input" id="dept" name="dept" type="text" placeholder="e.g., CSE / AIML / ECE" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="section">SECTOR:CLASS_SECTION <span class="req">*</span></label>
+                    <input class="form-input" id="section" name="section" type="text" placeholder="e.g., A / B / C" required>
+                  </div>
+
+                  <div class="form-divider"></div>
+
+                  <!-- Squad Configuration -->
+                  <div class="form-section-label">// 03: SQUAD CONFIGURATION</div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="teamname">SQUAD:TEAM_CODENAME <span class="req">*</span></label>
+                    <input class="form-input" id="teamname" name="teamname" type="text" placeholder="e.g., CyberVanguard" required>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="form-label" for="participantcount">CREW:UNIT_COUNT (EXCL. LEADER) <span class="req">*</span></label>
+                    <select class="form-select" id="participantcount" name="participantcount" required>
+                      <option value="" disabled selected>Select squad size</option>
+                      <option value="1">1 Member (Squad of 2)</option>
+                      <option value="2">2 Members (Squad of 3)</option>
+                      <option value="3">3 Members (Squad of 4)</option>
+                      <option value="4">4 Members (Squad of 5)</option>
+                    </select>
+                  </div>
+
+                  <!-- Dynamic Member Fields Wrap -->
+                  <div class="form-group full" id="member-fields-wrap" style="display:none;">
+                    <div class="form-section-label" style="margin-top:0.5rem;">// ADDITIONAL AGENT PROFILES</div>
+                    <div id="member-fields"></div>
+                  </div>
+
+                  <!-- Primary 8-Bit Tactile Submit Button -->
+                  <button type="submit" class="btn-submit">
+                    <span>EXECUTE HUNT [↵]</span>
+                    <span class="arrow">▶</span>
+                  </button>
+
+                  <!-- Google Authentication Module (Strict Requirement) -->
+                  <div class="auth-divider-wrap">
+                    <span class="auth-divider-text">OR AUTHENTICATE VIA</span>
+                  </div>
+
+                  <div class="google-auth-btn-wrap">
+                    <button type="button" class="btn-google-auth" onclick="alert('Google Identity Services initialized for AI HUNTX.');">
+                      <svg class="google-icon-svg" viewBox="0 0 24 24">
+                        <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                        <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                        <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+                        <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+                      </svg>
+                      <span>INITIALIZE WITH GOOGLE</span>
+                    </button>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+
+            <!-- Success State -->
+            <div class="form-success" id="form-success">
+              <div class="success-icon">
+                <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <h3>AGENT AUTHORIZED // LEVEL 01</h3>
+              <p>Your credentials have been securely committed to the AI HUNTX database.<br>Verify your communications inbox for incoming telemetry.</p>
+              <p style="margin-top:1rem; font-size:0.8rem; color:var(--text-dim);">SYSTEM TELEMETRY LINKED. REPORT TO SCAS NODE ON MISSION DATE.</p>
+              <a href="https://chat.whatsapp.com/BEx4YRGTjYb9YRKd9jDVkm" target="_blank" rel="noopener"
+                 style="display:inline-flex; align-items:center; gap:0.6rem; margin-top:1.5rem; padding:0.85rem 1.6rem;
+                        background:var(--accent-cyan); color:#060814; font-family:var(--font-hud);
+                        font-size:0.8rem; font-weight:700; letter-spacing:0.06em; text-transform:uppercase;
+                        box-shadow:4px 4px 0px var(--accent-indigo); text-decoration:none;">
+                <span>JOIN SQUAD COMMS CHANNEL [WHATSAPP]</span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FAQ // KNOWLEDGE CODEX
+============================================================ -->
+<section id="faq">
+  <div class="container">
+    <div class="details-header reveal">
+      <div class="section-eyebrow">// KNOWLEDGE CODEX //</div>
+      <h2 class="section-title">Query Protocol [SYS.FAQ]</h2>
+      <p class="section-sub">Standard responses for common operational queries regarding AI HUNTX.</p>
+    </div>
+
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <div class="faq-q">[01] Who is authorized to compete in AI HUNTX? <span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>All registered students of Sathyabama Institute of Science and Technology across all engineering, computing, and management disciplines are authorized to form squads.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">[02] What are the allowed squad capacity limits? <span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Squads must configure between 2 and 5 members (1 squad leader + 1 to 4 tactical members). Registrations are hard-capped at 50 total squads.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">[03] Is a pre-built neural prototype required prior to event? <span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Negative. The problem statements and AI hunt challenges will be encrypted and released on-site during the morning mission briefing.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">[04] What AI frameworks and tools are permissible? <span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Participants may use any standard AI platforms, open-source LLMs, computer vision libraries, Python data science ecosystems, and automation APIs.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">[05] Are there any registration fees or entry levies? <span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Zero registration fees. Entry is 100% free of cost courtesy of The Robotics Society Sathyabama.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q">[06] How are squads notified of confirmation? <span class="faq-toggle">+</span></div>
+        <div class="faq-a"><p>Automatic confirmation telemetry is transmitted immediately to the leader's email upon successful authorization through this console.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     FOOTER
+============================================================ -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="nav-logo">[ AI_HUNTX // CYBER TERMINAL ]</div>
+
+        <p style="margin-top:0.75rem; font-size:0.8rem; color:var(--text-dim);">SYSTEM VERSION 2.6 // SATHYABAMA INSTITUTE CHENNAI</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <ul>
+          <li><a href="#details">// 01: Mission Specs</a></li>
+          <li><a href="#timeline">// 02: Tactical Sequence</a></li>
+          <li><a href="#coordinators">// 03: Operators</a></li>
+          <li><a href="#register">// 04: Authorize Agent</a></li>
+          <li><a href="#faq">// 05: Query Codex</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Command Uplink</h4>
+        <ul>
+          <li><a href="tel:+917845932175">Kishore MS: +91 78459 32175</a></li>
+          <li><a href="tel:+917305926959">Amy: +91 73059 26959</a></li>
+          <li><a href="mailto:theroboticssocietysathyabama@gmail.com">trs@sathyabama.ac.in</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 AI HUNTX // THE ROBOTICS SOCIETY SIST. ALL PROTOCOLS RESERVED.</span>
+      <div class="footer-socials">
+        <a href="https://www.instagram.com/trs.sist" target="_blank" rel="noopener">INSTAGRAM</a>
+        <a href="https://www.linkedin.com/company/the-robotics-society-sathyabama/" target="_blank" rel="noopener">LINKEDIN</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Toast HUD Notification -->
+<div id="toast">
+  <span class="t-icon">
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+  </span>
+  <span id="toast-msg">SYSTEM NOTIFICATION</span>
+</div>
+
+<!-- ============================================================
+     JAVASCRIPT
+============================================================ -->
+<script src="assets/js/main.js"></script>
+</body>
+</html>
