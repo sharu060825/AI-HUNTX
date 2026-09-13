@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI HUNTX // COMMAND TERMINAL [ADMIN]</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Silkscreen:wght@400;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-canvas: #060814;
+    --bg-surface: #0a0d1e;
+    --bg-inset: #060613;
+    --accent-cyan: #00f5d4;
+    --accent-magenta: #f72585;
+    --accent-yellow: #fee440;
+    --accent-purple: #7209b7;
+    --accent-indigo: #3a0ca3;
+    --border-dim: rgba(0, 245, 212, 0.2);
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+  }
+  *, *::before, *::after {
+    box-sizing: border-box;
+    border-radius: 0 !important;
+  }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--bg-canvas);
+    background-image:
+      linear-gradient(to right, rgba(0, 245, 212, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(0, 245, 212, 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+    color: var(--text-main);
+    font-family: 'JetBrains Mono', monospace;
+    padding: 2.5rem 1.2rem;
+  }
+  .wrap { max-width: 1040px; margin: 0 auto; }
+  .header-badge {
+    font-family: 'Silkscreen', monospace;
+    font-size: 0.72rem;
+    color: var(--accent-cyan);
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+  }
+  h1 {
+    font-family: 'Press Start 2P', monospace;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    letter-spacing: 0.04em;
+    color: #ffffff;
+    text-shadow: 2px 2px 0px var(--accent-magenta), 4px 4px 0px var(--accent-indigo);
+    margin-bottom: 0.4rem;
+  }
+  .sub {
+    color: var(--accent-yellow);
+    font-family: 'Silkscreen', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    margin-bottom: 2rem;
+  }
+  .card {
+    background: var(--bg-surface);
+    border: 2px solid var(--border-dim);
+    box-shadow: 0 0 0 3px var(--bg-canvas), 0 0 0 5px var(--accent-cyan), 0 12px 25px rgba(0,0,0,0.7);
+    padding: 1.8rem;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  label {
+    display: block;
+    font-family: 'Silkscreen', monospace;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-bottom: 0.4rem;
+    text-transform: uppercase;
+  }
+  input, select {
+    width: 100%;
+    background: var(--bg-inset);
+    border: 2px solid #1e264a;
+    color: #ffffff;
+    padding: 0.75rem 0.9rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.9rem;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  input:focus, select:focus {
+    outline: none;
+    border-color: var(--accent-cyan);
+    box-shadow: 0 0 10px rgba(0, 245, 212, 0.4);
+  }
+  .row { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+  .row > div { flex: 1; min-width: 200px; margin-bottom: 1rem; }
+  button {
+    background: var(--accent-magenta);
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    font-family: 'Silkscreen', monospace;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.8rem 1.6rem;
+    cursor: pointer;
+    box-shadow: 3px 3px 0px var(--accent-purple);
+    transition: transform 0.08s, box-shadow 0.08s, background 0.15s;
+  }
+  button:hover:not(:disabled) {
+    background: #ff1375;
+    box-shadow: 4px 4px 0px var(--accent-purple);
+  }
+  button:active:not(:disabled) {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0px var(--accent-purple);
+  }
+  button.secondary {
+    background: var(--bg-inset);
+    border: 2px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    box-shadow: 3px 3px 0px var(--accent-indigo);
+  }
+  button.secondary:hover {
+    background: rgba(0, 245, 212, 0.1);
+    color: #ffffff;
+  }
+  button.danger {
+    background: #e60049;
+    border: 2px solid #ffffff;
+    color: #ffffff;
+    box-shadow: 3px 3px 0px #5c001e;
+  }
+  button:disabled { opacity: 0.4; cursor: not-allowed; }
+  .stat-row { display: flex; gap: 1.2rem; margin-bottom: 1rem; flex-wrap: wrap; }
+  .stat {
+    background: var(--bg-inset);
+    border: 2px solid var(--border-dim);
+    box-shadow: 3px 3px 0px var(--accent-indigo);
+    padding: 1.1rem 1.4rem;
+    min-width: 160px;
+    flex: 1;
+  }
+  .stat .num {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.4rem;
+    color: var(--accent-cyan);
+    margin-bottom: 0.35rem;
+  }
+  .stat .lbl {
+    font-family: 'Silkscreen', monospace;
+    font-size: 0.7rem;
+    color: var(--accent-yellow);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  /* Modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(4, 6, 15, 0.85);
+    backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 60;
+  }
+  .modal {
+    background: var(--bg-surface);
+    border: 2px solid var(--accent-cyan);
+    box-shadow: 0 0 0 4px #000, 0 0 0 7px var(--accent-magenta), 0 20px 40px rgba(0,0,0,0.9);
+    padding: 1.8rem;
+    width: 920px;
+    max-width: calc(100% - 40px);
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+  table { width: 100%; border-collapse: collapse; font-size: 0.82rem; }
+  th, td {
+    text-align: left;
+    padding: 0.75rem 0.8rem;
+    border-bottom: 1px solid var(--border-dim);
+    white-space: nowrap;
+  }
+  th {
+    color: var(--accent-cyan);
+    font-family: 'Silkscreen', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    position: sticky;
+    top: 0;
+    background: var(--bg-surface);
+    border-bottom: 2px solid var(--accent-cyan);
+  }
+  td { font-family: 'JetBrains Mono', monospace; }
+  .table-scroll {
+    overflow-x: auto;
+    max-height: 520px;
+    overflow-y: auto;
+    border: 1px solid var(--border-dim);
+    background: var(--bg-inset);
+  }
+  .top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    gap: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .msg { font-size: 0.85rem; margin-top: 0.8rem; font-family: 'Silkscreen', monospace; }
+  .msg.error { color: #ff0055; }
+  .msg.ok { color: var(--accent-cyan); }
+  #dashboard { display: none; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="header-badge">[ SYSTEM TELEMETRY // RESTRICTED ACCESS ]</div>
+  <h1>AI HUNTX // COMMAND TERMINAL</h1>
+  <div class="sub">AUTHORITY LEDGER // PARTICIPANT CAP CONTROL & DATA EXPORT</div>
+
+  <div class="card" id="login-card">
+    <form id="login-form">
+      <div class="row">
+        <div>
+          <label for="username">COMMAND OPERATOR [USER]</label>
+          <input id="username" name="username" type="text" autocomplete="username" placeholder="admin" required>
+        </div>
+        <div>
+          <label for="password">ACCESS KEY [PASSWORD]</label>
+          <input id="password" name="password" type="password" autocomplete="current-password" placeholder="••••••••" required>
+        </div>
+      </div>
+      <button type="submit">INITIALIZE LOGIN [↵]</button>
+      <div class="msg error" id="login-msg"></div>
+    </form>
+  </div>
+
+  <div id="dashboard">
+    <div class="top-bar">
+      <div class="stat-row">
+        <div class="stat">
+          <div class="num" id="stat-count">—</div>
+          <div class="lbl">SQUADS REGISTERED</div>
+        </div>
+        <div class="stat">
+          <div class="num" id="stat-members">—</div>
+          <div class="lbl">TOTAL OPERATORS</div>
+        </div>
+        <div class="stat">
+          <div class="num" id="stat-max">—</div>
+          <div class="lbl">SYSTEM CAP LIMIT</div>
+        </div>
+      </div>
+      <button class="secondary" id="logout-btn">TERMINATE SESSION</button>
+    </div>
+
+    <div class="card">
+      <div class="row" style="align-items:flex-end">
+        <div>
+          <label for="max-participants">CONFIGURED CAP LIMIT</label>
+          <input id="max-participants" type="number" min="1" step="1">
+        </div>
+        <div style="flex:0 0 auto">
+          <button id="save-cap-btn" type="button">COMMIT CAP [↵]</button>
+        </div>
+        <div style="flex:0 0 auto">
+          <button class="secondary" id="export-btn" type="button">EXPORT ROSTER [CSV]</button>
+        </div>
+      </div>
+      <div class="msg" id="settings-msg"></div>
+    </div>
+
+    <div class="card">
+      <div class="modal-overlay" id="edit-modal">
+        <div class="modal">
+          <div id="edit-card" style="display:block; margin-bottom:0;">
+            <h3 style="font-family:'Press Start 2P',monospace; font-size:1rem; color:var(--accent-cyan); margin-top:0; margin-bottom:1.2rem">EDIT AGENT DOSSIER</h3>
+            <div class="row">
+              <div>
+                <label for="edit-fullname">Leader Handle</label>
+                <input id="edit-fullname">
+              </div>
+              <div>
+                <label for="edit-regno">Register ID</label>
+                <input id="edit-regno">
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <label for="edit-mobile">Comms Mobile</label>
+                <input id="edit-mobile">
+              </div>
+              <div>
+                <label for="edit-email">Comms Email</label>
+                <input id="edit-email">
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <label for="edit-dept">Department</label>
+                <input id="edit-dept">
+              </div>
+              <div>
+                <label for="edit-section">Section</label>
+                <input id="edit-section">
+              </div>
+            </div>
+            <div class="row">
+              <div>
+                <label for="edit-teamname">Squad Codename</label>
+                <input id="edit-teamname">
+              </div>
+              <div>
+                <label for="edit-members-select">Crew Count (Excl. Leader) [Team: 3–5]</label>
+                <select id="edit-members-select">
+                  <option value="2">2 (Team of 3)</option>
+                  <option value="3">3 (Team of 4)</option>
+                  <option value="4">4 (Team of 5)</option>
+                </select>
+              </div>
+            </div>
+            <div id="edit-member-fields" style="margin-top:0.8rem"></div>
+            <div style="margin-top:1.2rem; display:flex; gap:1rem;">
+              <button id="save-edit-btn">COMMIT CHANGES</button>
+              <button class="secondary" id="cancel-edit-btn" type="button">ABORT</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="table-scroll">
+        <table id="reg-table">
+          <thead>
+            <tr>
+              <th>TIME STAMP</th>
+              <th>OPERATOR HANDLE</th>
+              <th>REGISTER ID</th>
+              <th>MOBILE</th>
+              <th>EMAIL</th>
+              <th>DEPT</th>
+              <th>SECTION</th>
+              <th>SQUAD NAME</th>
+              <th>SIZE</th>
+              <th>CREW DOSSIER</th>
+            </tr>
+          </thead>
+          <tbody id="reg-tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="assets/js/admin.js"></script>
+</body>
+</html>
