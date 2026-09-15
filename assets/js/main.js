@@ -3,10 +3,10 @@
 ================================================== */
 const CONFIG = {
   // Target date for countdown (ISO format: YYYY-MM-DDTHH:MM:SS)
-  eventDate: '2026-07-15 09:00:00',
+  eventDate: '2026-10-06 09:00:00',
 
   // Organiser email — receives notification on every registration
-  techEmail: 'kpharipriya2007@gmail.com',
+  techEmail: 'kishore2507ms@gmail.com',
 
   // ─── EmailJS settings ───────────────────────────────────────────────────
   // Sign up free at https://www.emailjs.com (200 emails/month free tier)
@@ -18,10 +18,10 @@ const CONFIG = {
   //  5. Account → API Keys → copy your Public Key
   //  6. Paste all three values below — done, no backend needed!
   emailjs: {
-    publicKey:              'eVRwOJAYAjfbzv5Km',
-    serviceId:              'service_pk6lvfp',
-    confirmationTemplateId: 'template_0cbuz08',
-    notificationTemplateId: 'template_t8pl4ex',
+    publicKey:              '2P8-MACtgrnFXx0sK',
+    serviceId:              'service_xjqnn1o',
+    confirmationTemplateId: 'template_eqza3n7',
+    notificationTemplateId: 'template_kf67eed',
   },
 
   // ─── Backend API (Express + MongoDB) ────────────────────────────────────
@@ -446,7 +446,7 @@ document.querySelectorAll('.detail-card, .coordinator-card').forEach(card => {
 })();
 
 /* ==================================================
-   HAMBURGER / MOBILE NAV
+  / MOBILE NAV
 ================================================== */
 (function() {
   const ham = document.getElementById('ham');
@@ -514,6 +514,14 @@ function showToast(msg, duration = 4000) {
   document.getElementById('toast-msg').textContent = msg;
   t.classList.add('show');
   setTimeout(() => t.classList.remove('show'), duration);
+}
+
+function isEmailDeliveryNonFatal(err) {
+  const raw = String(err?.text || err?.message || err || '').toLowerCase();
+  return (
+    err?.status === 422 ||
+    /recipients address is empty|recipient.*empty|missing.*recipient|missing.*email|template.*not found|invalid.*template|bad request/.test(raw)
+  );
 }
 
 /* ==================================================
@@ -658,7 +666,7 @@ document.getElementById('reg-form').addEventListener('submit', async function(e)
     team_members:     memberSummary.trim(),
     from_email:       data.get('email'),       // for notification reply-to
     submitted_at:     new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
-    whatsapp_link:    'https://chat.whatsapp.com/BEx4YRGTjYb9YRKd9jDVkm', // event WhatsApp group — add {{whatsapp_link}} to the EmailJS confirmation template
+    whatsapp_link:    'https://chat.whatsapp.com/FAcdjbTpnwl4QIT7d6AOAt', // event WhatsApp group — add {{whatsapp_link}} to the EmailJS confirmation template
   };
 
   // Persist to MongoDB (via the Express API) first — the server enforces
@@ -730,9 +738,14 @@ document.getElementById('reg-form').addEventListener('submit', async function(e)
 
       submitted = true;
     } catch (err) {
+      const nonFatal = isEmailDeliveryNonFatal(err);
       console.error('[Shark Event] EmailJS error:', err);
       errorMsg = err?.text || err?.message || JSON.stringify(err);
-      submitted = false;
+      submitted = nonFatal;
+
+      if (nonFatal) {
+        console.warn('[Shark Event] Registration saved successfully, but EmailJS delivery was skipped because the recipient/template is not configured correctly.');
+      }
     }
   } else {
     console.log('[Shark Event] Demo mode — credentials not set.');
@@ -743,7 +756,7 @@ document.getElementById('reg-form').addEventListener('submit', async function(e)
     document.getElementById('form-body').style.display = 'none';
     const s = document.getElementById('form-success');
     s.style.display = 'flex';
-    showToast('You\'re registered! Check your inbox.');
+    showToast(errorMsg ? 'You\'re registered! Email delivery is temporarily unavailable.' : 'You\'re registered! Check your inbox.');
   } else {
     btn.disabled = false;
     btn.querySelector('span:first-child').textContent = 'Submit Registration';
